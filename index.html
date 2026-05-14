@@ -132,6 +132,7 @@
       color: var(--gold) !important;
       transition: background .3s, color .3s;
       white-space: nowrap;
+      cursor: pointer;
     }
     .btn-nav:hover { background: var(--gold); color: #000 !important; }
 
@@ -454,6 +455,7 @@
       color: #000; font-size: .8rem; font-weight: 700;
       letter-spacing: .06em; border-radius: 4px;
       transition: opacity .2s, transform .2s; white-space: nowrap;
+      cursor: pointer; border: none;
     }
     .btn-enroll:hover { opacity: .9; transform: translateY(-1px); }
 
@@ -648,6 +650,69 @@
     .heart { color:#e05252; }
     .mahak { color:var(--gold-light); font-weight:700; }
 
+    /* ────────────────────────────────────────────────
+       ENROLLMENT POPUP (MODAL) - ADDED BY AI
+    ──────────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,.75);
+      backdrop-filter: blur(6px);
+      z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden;
+      transition: opacity .3s, visibility .3s;
+    }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+    
+    .modal-content {
+      background: var(--black-3);
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      padding: 40px 36px;
+      max-width: 480px;
+      width: 90%;
+      position: relative;
+      transform: translateY(30px);
+      transition: transform .3s;
+    }
+    .modal-overlay.open .modal-content { transform: translateY(0); }
+    
+    .modal-close {
+      position: absolute; top: 14px; right: 18px;
+      background: none; border: none; color: var(--text-muted);
+      font-size: 1.8rem; cursor: pointer; transition: color .2s; line-height: 1;
+    }
+    .modal-close:hover { color: var(--gold); }
+    
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 700; color: var(--gold-light);
+      margin-bottom: 24px;
+    }
+    
+    .modal-form { display: flex; flex-direction: column; gap: 16px; }
+    
+    .modal-input {
+      width: 100%; padding: 14px 16px;
+      background: var(--black); border: 1px solid rgba(212,175,55,.2);
+      border-radius: 6px; color: var(--text); font-family: 'Lato', sans-serif; font-size: .9rem;
+      outline: none; transition: border-color .2s;
+    }
+    .modal-input:focus { border-color: var(--gold); }
+    .modal-input::placeholder { color: var(--text-muted); }
+    
+    select.modal-input { cursor: pointer; appearance: none; -webkit-appearance: none; }
+    
+    .modal-submit {
+      padding: 14px; background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: #000; font-weight: 700; font-size: .9rem; letter-spacing: .08em;
+      font-family: 'Lato', sans-serif;
+      border: none; border-radius: 6px; cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      margin-top: 8px;
+    }
+    .modal-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,175,55,.3); }
+
     /* ════════════════════════════════
        RESPONSIVE
     ════════════════════════════════ */
@@ -771,7 +836,7 @@
     <li><a href="#instructors">Instructors</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#testimonials">Reviews</a></li>
-    <li><a href="#pricing" class="btn-nav">Enroll Now</a></li>
+    <li><a class="btn-nav open-enroll-modal">Enroll Now</a></li>
   </ul>
 
   <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -786,7 +851,7 @@
   <a href="#instructors"  onclick="closeMobile()">Instructors</a>
   <a href="#pricing"      onclick="closeMobile()">Pricing</a>
   <a href="#testimonials" onclick="closeMobile()">Reviews</a>
-  <a href="#pricing"      onclick="closeMobile()" class="enroll-mobile">Enroll Now</a>
+  <a class="enroll-mobile open-enroll-modal" onclick="closeMobile()">Enroll Now</a>
 </div>
 
 <!-- ── HERO ── -->
@@ -945,7 +1010,7 @@
         </div>
         <div class="course-footer">
           <div><span class="price">$89</span><span class="price-old">$199</span></div>
-          <a href="#" class="btn-enroll">Enroll Now</a>
+          <button class="btn-enroll open-enroll-modal">Enroll Now</button>
         </div>
       </div>
     </div>
@@ -966,7 +1031,7 @@
         </div>
         <div class="course-footer">
           <div><span class="price">$119</span><span class="price-old">$249</span></div>
-          <a href="#" class="btn-enroll">Enroll Now</a>
+          <button class="btn-enroll open-enroll-modal">Enroll Now</button>
         </div>
       </div>
     </div>
@@ -987,7 +1052,7 @@
         </div>
         <div class="course-footer">
           <div><span class="price">$79</span><span class="price-old">$179</span></div>
-          <a href="#" class="btn-enroll">Enroll Now</a>
+          <button class="btn-enroll open-enroll-modal">Enroll Now</button>
         </div>
       </div>
     </div>
@@ -1008,7 +1073,7 @@
         </div>
         <div class="course-footer">
           <div><span class="price">$99</span><span class="price-old">$219</span></div>
-          <a href="#" class="btn-enroll">Enroll Now</a>
+          <button class="btn-enroll open-enroll-modal">Enroll Now</button>
         </div>
       </div>
     </div>
@@ -1029,7 +1094,7 @@
         </div>
         <div class="course-footer">
           <div><span class="price">$109</span><span class="price-old">$229</span></div>
-          <a href="#" class="btn-enroll">Enroll Now</a>
+          <button class="btn-enroll open-enroll-modal">Enroll Now</button>
         </div>
       </div>
     </div>
@@ -1050,7 +1115,7 @@
         </div>
         <div class="course-footer">
           <div><span class="price">$69</span><span class="price-old">$149</span></div>
-          <a href="#" class="btn-enroll">Enroll Now</a>
+          <button class="btn-enroll open-enroll-modal">Enroll Now</button>
         </div>
       </div>
     </div>
@@ -1164,7 +1229,7 @@
         <li style="opacity:.35"><div class="check" style="opacity:.3">✓</div> 1-on-1 mentorship sessions</li>
         <li style="opacity:.35"><div class="check" style="opacity:.3">✓</div> Career coaching</li>
       </ul>
-      <a href="#" class="btn-outline" style="display:block;text-align:center">Get Started</a>
+      <a href="#" class="btn-outline open-enroll-modal" style="display:block;text-align:center">Get Started</a>
     </div>
 
     <div class="pricing-card featured reveal-child">
@@ -1180,7 +1245,7 @@
         <li><div class="check">✓</div> Career coaching & resume review</li>
         <li><div class="check">✓</div> Priority support (24hr)</li>
       </ul>
-      <a href="#" class="btn-primary" style="display:block;text-align:center;justify-content:center">Start Learning</a>
+      <a href="#" class="btn-primary open-enroll-modal" style="display:block;text-align:center;justify-content:center">Start Learning</a>
     </div>
 
     <div class="pricing-card reveal-child">
@@ -1195,7 +1260,7 @@
         <li><div class="check">✓</div> Dedicated account manager</li>
         <li><div class="check">✓</div> Invoice billing & SSO</li>
       </ul>
-      <a href="#" class="btn-outline" style="display:block;text-align:center">Contact Sales</a>
+      <a href="#" class="btn-outline open-enroll-modal" style="display:block;text-align:center">Contact Sales</a>
     </div>
 
   </div>
@@ -1287,6 +1352,32 @@
   </div>
 </footer>
 
+<!-- ────────────────────────────────────────────────
+     ENROLLMENT POPUP (ADDED)
+──────────────────────────────────────────────── -->
+<div id="enrollModal" class="modal-overlay">
+  <div class="modal-content">
+    <button class="modal-close" id="closeModalBtn">&times;</button>
+    <h3 class="modal-title">Enroll Now</h3>
+    <form class="modal-form" id="enrollForm">
+      <input type="text" class="modal-input" placeholder="Your Full Name" required />
+      <input type="email" class="modal-input" placeholder="Your Email Address" required />
+      <input type="tel" class="modal-input" placeholder="Your Phone Number" />
+      <select class="modal-input">
+        <option value="" disabled selected>Select a Course</option>
+        <option>Full-Stack Web Development</option>
+        <option>AI & Machine Learning</option>
+        <option>UI/UX Design</option>
+        <option>Data Science & Analytics</option>
+        <option>Ethical Hacking</option>
+        <option>Digital Marketing</option>
+      </select>
+      <button type="submit" class="modal-submit">Submit Enrollment</button>
+    </form>
+  </div>
+</div>
+
+
 <script>
   // ══════════════════════════════════════════
   //  HAMBURGER + MOBILE MENU
@@ -1300,9 +1391,7 @@
     hamburger.classList.toggle('open');
 
     if (isOpening) {
-      // Show first, then animate height (display:none blocks transition)
       mobileMenu.style.display = 'flex';
-      // Small delay so browser registers display change before transition
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           mobileMenu.classList.add('open');
@@ -1310,14 +1399,13 @@
       });
     } else {
       mobileMenu.classList.remove('open');
-      // Hide after transition ends (400ms matches CSS transition)
       setTimeout(() => {
         mobileMenu.style.display = 'none';
       }, 420);
     }
   });
 
-  // Close mobile menu function (used by onclick on links)
+  // Close mobile menu function
   function closeMobile() {
     hamburger.classList.remove('open');
     mobileMenu.classList.remove('open');
@@ -1328,18 +1416,62 @@
 
   // Close on outside click
   document.addEventListener('click', (e) => {
-    if (
-      !hamburger.contains(e.target) &&
-      !mobileMenu.contains(e.target)
-    ) {
+    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
       closeMobile();
     }
   });
 
   // Close mobile menu on Escape key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMobile();
+    if (e.key === 'Escape') {
+      closeMobile();
+      closeEnrollModal(); // Also close modal on escape
+    }
   });
+
+  // ══════════════════════════════════════════
+  //  ENROLLMENT POPUP LOGIC (ADDED)
+  // ══════════════════════════════════════════
+  const modal = document.getElementById('enrollModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const enrollForm = document.getElementById('enrollForm');
+  const openModalBtns = document.querySelectorAll('.open-enroll-modal');
+
+  function openEnrollModal(e) {
+    if(e) e.preventDefault(); // Prevent default anchor jump
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden'; // Prevent background scroll
+  }
+
+  function closeEnrollModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = ''; // Restore scroll
+  }
+
+  // Attach click event to all Enroll buttons
+  openModalBtns.forEach(btn => {
+    btn.addEventListener('click', openEnrollModal);
+  });
+
+  // Close modal on X button
+  closeModalBtn.addEventListener('click', closeEnrollModal);
+
+  // Close modal on clicking overlay background
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeEnrollModal();
+    }
+  });
+
+  // Handle Form Submission
+  enrollForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Simple alert for demonstration
+    alert('🎉 Enrollment Successful! We will contact you shortly.');
+    enrollForm.reset(); // Clear the form
+    closeEnrollModal(); // Close the popup
+  });
+
 
   // ══════════════════════════════════════════
   //  SCROLL REVEAL
@@ -1378,14 +1510,12 @@
   const mobileLinks  = document.querySelectorAll('.mobile-menu a[href^="#"]');
 
   function setActiveLinks(id) {
-    // Desktop
     desktopLinks.forEach(link => {
       link.classList.remove('active');
       if (link.getAttribute('href') === '#' + id) {
         link.classList.add('active');
       }
     });
-    // Mobile
     mobileLinks.forEach(link => {
       link.style.color = '';
       link.style.fontWeight = '';
@@ -1407,7 +1537,7 @@
   sections.forEach(s => navObserver.observe(s));
 
   // ══════════════════════════════════════════
-  //  SMOOTH SCROLL  (80px navbar offset)
+  //  SMOOTH SCROLL  (76px navbar offset)
   // ══════════════════════════════════════════
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', function (e) {
@@ -1420,7 +1550,6 @@
           window.scrollTo({ top, behavior: 'smooth' });
         }
       }
-      // Always close mobile menu on any link click
       closeMobile();
     });
   });
@@ -1436,12 +1565,8 @@
       mainNav.style.boxShadow = 'none';
     }
   }, { passive: true });
+
 </script>
-
-  // ── Scroll reveal ──
-
-
-
 
 </body>
 </html>
